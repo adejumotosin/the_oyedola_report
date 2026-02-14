@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Audit - @theoyedolayo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 1.1em;
+        }
+
+        .account-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            background: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .card h3 {
+            color: #4a5568;
+            margin: 20px 0 10px 0;
+            font-size: 1.2em;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .metric-box {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+
+        .metric-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            color: #718096;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .insight-box {
+            background: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .insight-title {
+            font-weight: 700;
+            color: #2c5282;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .insight-text {
+            color: #2d3748;
+            line-height: 1.8;
+        }
+
+        .recommendation {
+            background: #f0fff4;
+            border-left: 4px solid #48bb78;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .recommendation-title {
+            font-weight: 700;
+            color: #22543d;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .warning {
+            background: #fffaf0;
+            border-left: 4px solid #ed8936;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .warning-title {
+            font-weight: 700;
+            color: #7c2d12;
+            margin-bottom: 10px;
+        }
+
+        .content-pillar {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 2px solid #667eea;
+        }
+
+        .pillar-title {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .pillar-content {
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .top-post {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+        }
+
+        .post-metrics {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .post-metric {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #718096;
+            font-size: 0.9em;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .status-excellent { background: #c6f6d5; color: #22543d; }
+        .status-good { background: #bee3f8; color: #2c5282; }
+        .status-needs-work { background: #fed7d7; color: #742a2a; }
+
+        ul, ol {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #4a5568;
+        }
+
+        .action-items {
+            background: #fef5e7;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .action-items h4 {
+            color: #744210;
+            margin-bottom: 15px;
+        }
+
+        .priority-high {
+            color: #c53030;
+            font-weight: 700;
+        }
+
+        .priority-medium {
+            color: #d69e2e;
+            font-weight: 700;
+        }
+
+        .priority-low {
+            color: #38a169;
+            font-weight: 700;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .tabs {
+                display: none;
+            }
+            .content-section {
+                display: block !important;
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Instagram Audit Report</h1>
+            <p class="subtitle">Comprehensive Social Media Analysis</p>
+            <span class="account-tag">@theoyedolayo</span>
+            <div style="margin-top: 15px; color: #718096; font-size: 0.9em;">
+                <strong>Audit Period:</strong> November 2025 - February 2026 (Analysis Date: February 14, 2026)
+            </div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showSection('overview')">Executive Summary</button>
+            <button class="tab" onclick="showSection('content')">Content Analysis</button>
+            <button class="tab" onclick="showSection('audience')">Audience & Engagement</button>
+            <button class="tab" onclick="showSection('brand')">Brand Positioning</button>
+            <button class="tab" onclick="showSection('recommendations')">Strategic Recommendations</button>
+        </div>
+
+        <!-- EXECUTIVE SUMMARY -->
+        <div id="overview" class="content-section active">
+            <div class="card">
+                <h2>📈 Account Performance Overview</h2>
+                
+                <div class="metric-grid">
+                    <div class="metric-box">
+                        <div class="metric-value">259</div>
+                        <div class="metric-label">Followers</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">74</div>
+                        <div class="metric-label">Following</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">87</div>
+                        <div class="metric-label">Total Posts</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">11.36%</div>
+                        <div class="metric-label">Avg Engagement Rate</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">27.8</div>
+                        <div class="metric-label">Avg Likes/Post</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">1.7</div>
+                        <div class="metric-label">Avg Comments/Post</div>
+                    </div>
+                </div>
+
+                <div class="insight-box">
+                    <div class="insight-title">✓ Overall Performance: Excellent Engagement</div>
+                    <div class="insight-text">
+                        With an 11.36% engagement rate, @theoyedolayo significantly outperforms industry benchmarks (1-3% for accounts of this size). This indicates a highly engaged, quality audience that resonates deeply with the content. The account is verified, adding credibility and authority.
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <div class="warning-title">⚠ Growth Opportunity</div>
+                    <div class="insight-text">
+                        While engagement is exceptional, the follower count (259) represents the primary growth opportunity. The high-quality content and strong engagement suggest the account is ready to scale reach significantly through strategic content distribution and promotion.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🎯 Content Pillars Analysis</h2>
+                
+                <div class="content-pillar">
+                    <div class="pillar-title">1. Building Highly-Aligned Global Talent ✨</div>
+                    <div class="pillar-content">
+                        <strong>Performance:</strong> <span class="status-badge status-excellent">Strong</span><br>
+                        This pillar is well-represented through HACC (Highly Aligned Career Cohort) content, webinar promotions, and career development posts. Content around global positioning, hiring systems, and CV/LinkedIn optimization generates strong engagement and establishes expertise.
+                    </div>
+                </div>
+
+                <div class="content-pillar">
+                    <div class="pillar-title">2. Equipping Higher Intelligence</div>
+                    <div class="pillar-content">
+                        <strong>Performance:</strong> <span class="status-badge status-good">Moderate</span><br>
+                        Career Gospel podcast clips featuring discussions on "Higher Intelligence vs AI" and spiritual intelligence in the workplace perform well. However, this pillar could be amplified with more consistent standalone content beyond podcast clips.
+                    </div>
+                </div>
+
+                <div class="content-pillar">
+                    <div class="pillar-title">3. Living Light 💡</div>
+                    <div class="pillar-content">
+                        <strong>Performance:</strong> <span class="status-badge status-excellent">Very Strong</span><br>
+                        The "Audience of One" video (179 likes, 1,507 views) and affirmation carousels demonstrate exceptional resonance. Content about faith-driven purpose, alignment over anxiety, and spiritual posture generates the highest engagement, indicating strong audience connection with values-based messaging.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🔑 Key Findings</h2>
+                
+                <div class="insight-box">
+                    <div class="insight-title">✓ Strengths</div>
+                    <ul>
+                        <li>Exceptional engagement rate (11.36%) - nearly 4-10x industry average</li>
+                        <li>Verified account with professional credibility</li>
+                        <li>Strong brand identity centered on faith, alignment, and global career excellence</li>
+                        <li>High-quality carousel and video content with consistent aesthetic</li>
+                        <li>Clear positioning as thought leader in faith-based career development</li>
+                        <li>Strategic use of HACC cohort to build community and demonstrate expertise</li>
+                    </ul>
+                </div>
+
+                <div class="warning">
+                    <div class="warning-title">⚠ Areas for Improvement</div>
+                    <ul>
+                        <li>Limited reach due to small follower base (259)</li>
+                        <li>Inconsistent posting frequency (gaps between posts)</li>
+                        <li>Minimal use of Reels/short-form video (only 4 videos in recent posts)</li>
+                        <li>Limited use of Instagram Stories for daily engagement</li>
+                        <li>Low comment engagement relative to likes (1.7 avg comments)</li>
+                        <li>No clear call-to-action strategy for converting followers to cohort members</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENT ANALYSIS -->
+        <div id="content" class="content-section">
+            <div class="card">
+                <h2>📊 Content Performance Breakdown</h2>
+                
+                <h3>Content Mix</h3>
+                <div class="metric-grid">
+                    <div class="metric-box">
+                        <div class="metric-value">41.7%</div>
+                        <div class="metric-label">Single Images</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">33.3%</div>
+                        <div class="metric-label">Video Content</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">25%</div>
+                        <div class="metric-label">Carousels</div>
+                    </div>
+                </div>
+
+                <div class="insight-box">
+                    <div class="insight-title">Content Strategy Analysis</div>
+                    <div class="insight-text">
+                        The current mix is relatively balanced, but heavily weighted toward static images. Instagram's algorithm favors Reels and video content for discovery and reach. The account would benefit from shifting to 50%+ video/Reels content while maintaining the strong carousel format for educational content.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🏆 Top Performing Content</h2>
+                
+                <div class="top-post">
+                    <strong>1. "Audience of One" Video</strong> (November 14, 2025)
+                    <div class="post-metrics">
+                        <span class="post-metric">❤️ 179 likes</span>
+                        <span class="post-metric">💬 9 comments</span>
+                        <span class="post-metric">👁 1,507 views</span>
+                        <span class="status-badge status-excellent">Viral Performance</span>
+                    </div>
+                    <p style="margin-top: 10px; color: #4a5568;">
+                        <strong>Why it worked:</strong> Authentic personal story about staying true to faith-based purpose despite social media pressures. Vulnerable, relatable, and aligned with core "Living Light" pillar. Reposted content with proper credit attribution.
+                    </p>
+                </div>
+
+                <div class="top-post">
+                    <strong>2. "Alignment Over Anxiety" Affirmations Carousel</strong> (January 19, 2026)
+                    <div class="post-metrics">
+                        <span class="post-metric">❤️ 19 likes</span>
+                        <span class="post-metric">💬 2 comments</span>
+                        <span class="status-badge status-good">Strong Engagement</span>
+                    </div>
+                    <p style="margin-top: 10px; color: #4a5568;">
+                        <strong>Why it worked:</strong> 6-slide carousel with branded "Affirmations with Dola" series. Practical, inspirational, and highly shareable. Pinned post indicates strategic importance. Combines faith, career, and mental health themes.
+                    </p>
+                </div>
+
+                <div class="top-post">
+                    <strong>3. "Global Talent Gets Seen, Shortlisted & Hired" Event</strong> (January 27-30, 2026)
+                    <div class="post-metrics">
+                        <span class="post-metric">❤️ 30 likes</span>
+                        <span class="post-metric">💬 0-2 comments</span>
+                        <span class="status-badge status-good">Multiple Posts</span>
+                    </div>
+                    <p style="margin-top: 10px; color: #4a5568;">
+                        <strong>Why it worked:</strong> Strategic lead generation for HACC webinar. Professional event graphics with clear value proposition. Multiple posts created urgency and reinforced message. Leveraged guest expert (Matt Craven) for credibility.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📝 Content Themes & Patterns</h2>
+                
+                <h3>High-Performing Topics:</h3>
+                <ul>
+                    <li><strong>Faith & Purpose:</strong> "Audience of One," alignment, spiritual posture in marketplace</li>
+                    <li><strong>Career Strategy:</strong> Global positioning, hiring systems, LinkedIn optimization</li>
+                    <li><strong>Identity & Values:</strong> Integrity, fear vs. faith, transformation</li>
+                    <li><strong>Affirmations:</strong> Weekly declarations, scripture-based encouragement</li>
+                    <li><strong>HACC Promotions:</strong> Webinar registrations, cohort launches, expert collaborations</li>
+                </ul>
+
+                <h3>Content Format Insights:</h3>
+                <div class="insight-box">
+                    <div class="insight-title">✓ What's Working</div>
+                    <ul>
+                        <li><strong>Carousels with 6-7 slides:</strong> Ideal for educational content and affirmations</li>
+                        <li><strong>Personal story videos:</strong> High authenticity drives exceptional engagement</li>
+                        <li><strong>Professional event graphics:</strong> Clear branding and credibility for HACC</li>
+                        <li><strong>Pinned posts strategy:</strong> Highlighting core values and key content</li>
+                        <li><strong>Long-form captions:</strong> Detailed, thoughtful writing that educates and inspires</li>
+                    </ul>
+                </div>
+
+                <div class="warning">
+                    <div class="warning-title">⚠ What's Underutilized</div>
+                    <ul>
+                        <li><strong>Reels:</strong> Only 4 video posts, missing Instagram's primary discovery format</li>
+                        <li><strong>Stories:</strong> No visible story highlights, missing daily engagement opportunity</li>
+                        <li><strong>User-generated content:</strong> No testimonials or cohort member features</li>
+                        <li><strong>Behind-the-scenes:</strong> Limited personal glimpses into process/journey</li>
+                        <li><strong>Interactive content:</strong> No polls, questions, or engagement prompts in captions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📅 Posting Frequency Analysis</h2>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Current Posting Patterns</div>
+                    <div class="insight-text">
+                        Based on recent posts (Nov 2025 - Feb 2026), posting frequency is inconsistent:<br><br>
+                        <ul>
+                            <li>November: 1 post (major gap after viral video)</li>
+                            <li>January: 6 posts (strong comeback with HACC launch)</li>
+                            <li>February: 5 posts (maintaining momentum)</li>
+                        </ul>
+                        <br>
+                        <strong>Average:</strong> ~3 posts per month (very low for Instagram growth)<br>
+                        <strong>Recommendation:</strong> Minimum 8-12 posts per month (2-3 per week) + daily Stories
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AUDIENCE & ENGAGEMENT -->
+        <div id="audience" class="content-section">
+            <div class="card">
+                <h2>👥 Audience Profile & Engagement Analysis</h2>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Audience Characteristics</div>
+                    <div class="insight-text">
+                        <strong>Primary Audience:</strong> High-performing professionals, globally-minded career seekers, faith-based entrepreneurs<br>
+                        <strong>Likely Demographics:</strong> 
+                        <ul>
+                            <li>Age: 28-45 (career-building phase)</li>
+                            <li>Professional: Mid-senior level, globally mobile</li>
+                            <li>Values: Faith-driven, excellence-oriented, purpose-seeking</li>
+                            <li>Location: International (UK, Nigeria, global diaspora)</li>
+                            <li>Interests: Career development, spiritual growth, global mobility</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Engagement Quality Assessment</h3>
+                
+                <div class="metric-grid">
+                    <div class="metric-box">
+                        <div class="metric-value">11.36%</div>
+                        <div class="metric-label">Engagement Rate</div>
+                        <span class="status-badge status-excellent">Excellent</span>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">94.2%</div>
+                        <div class="metric-label">Like-to-Engagement Ratio</div>
+                        <span class="status-badge status-good">Normal</span>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">5.8%</div>
+                        <div class="metric-label">Comment-to-Engagement</div>
+                        <span class="status-badge status-needs-work">Low</span>
+                    </div>
+                </div>
+
+                <div class="insight-box">
+                    <div class="insight-title">Engagement Analysis</div>
+                    <div class="insight-text">
+                        <strong>Strengths:</strong>
+                        <ul>
+                            <li>Exceptionally high overall engagement rate (11.36%) vs. 1-3% industry average</li>
+                            <li>Audience is highly invested and aligned with content values</li>
+                            <li>Video content drives significantly higher engagement (viral performance)</li>
+                            <li>Pinned posts maintain ongoing engagement over time</li>
+                        </ul>
+                        <br>
+                        <strong>Opportunities:</strong>
+                        <ul>
+                            <li>Low comment-to-like ratio (1.7 comments avg) suggests passive engagement</li>
+                            <li>Need more conversation-starting CTAs to boost comment activity</li>
+                            <li>Opportunity to build deeper community through response engagement</li>
+                            <li>Stories could facilitate daily micro-interactions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="recommendation">
+                    <div class="recommendation-title">💡 Boosting Comment Engagement</div>
+                    <div class="insight-text">
+                        <strong>Tactical Strategies:</strong>
+                        <ol>
+                            <li><strong>End with Questions:</strong> "What's one area where you're choosing alignment over anxiety this week?"</li>
+                            <li><strong>Share Prompts:</strong> "Comment 'ALIGN' if this resonated with you"</li>
+                            <li><strong>Poll in Captions:</strong> "A or B: Which webinar topic would serve you most?"</li>
+                            <li><strong>Story to Feed:</strong> "Answer in Stories, share best responses in feed"</li>
+                            <li><strong>Response Videos:</strong> Create content responding to follower questions/comments</li>
+                            <li><strong>Community Spotlights:</strong> Feature HACC member wins/testimonials</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📊 Engagement Benchmarking</h2>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Industry Comparison</div>
+                    <div class="insight-text">
+                        <table style="width: 100%; margin-top: 10px; border-collapse: collapse;">
+                            <tr style="background: #f7fafc;">
+                                <th style="padding: 10px; text-align: left; border-bottom: 2px solid #e2e8f0;">Metric</th>
+                                <th style="padding: 10px; text-align: center; border-bottom: 2px solid #e2e8f0;">@theoyedolayo</th>
+                                <th style="padding: 10px; text-align: center; border-bottom: 2px solid #e2e8f0;">Industry Average</th>
+                                <th style="padding: 10px; text-align: center; border-bottom: 2px solid #e2e8f0;">Status</th>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border-bottom: 1px solid #e2e8f0;">Engagement Rate</td>
+                                <td style="padding: 10px; text-align: center; border-bottom: 1px solid #e2e8f0;"><strong>11.36%</strong></td>
+                                <td style="padding: 10px; text-align: center; border-bottom: 1px solid #e2e8f0;">1-3%</td>
+                                <td style="padding: 10px; text-align: center; border-bottom: 1px solid #e2e8f0;"><span class="status-badge status-excellent">4-10x Above</span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border-bottom: 1px solid #e2e8f0;">Posting Frequency</td>
+                                <td style="padding: 10px; text-align: center; border-bottom: 1px solid #e2e8f0;"><strong>~3/month</strong></td>
+                                <td style="padding: 10px; text-align: center; border-bottom: 1px solid #e2e8f0;">12-20/month</td>
+                                <td style="padding: 10px; text-align: center; border-bottom: 1px solid #e2e8f0;"><span class="status-badge status-needs-work">Below</span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px; border-bottom: 1px solid #e2e8f0;">Video Content %</td>
+                                <td style="padding: 10px; text-align: center; border-bottom: 1px solid #e2e8f0;"><strong>33%</strong></td>
+                                <td style="padding: 10px; text-align: center; border-bottom: 1px solid #e2e8f0;">50-60%</td>
+                                <td style="padding: 10px; text-align: center; border-bottom: 1px solid #e2e8f0;"><span class="status-badge status-good">Moderate</span></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 10px;">Story Usage</td>
+                                <td style="padding: 10px; text-align: center;"><strong>Minimal</strong></td>
+                                <td style="padding: 10px; text-align: center;">Daily</td>
+                                <td style="padding: 10px; text-align: center;"><span class="status-badge status-needs-work">Below</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🎯 Audience Growth Potential</h2>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Growth Opportunity Analysis</div>
+                    <div class="insight-text">
+                        <strong>Current State:</strong> 259 followers with 11.36% engagement<br>
+                        <strong>Target Audience Size:</strong> Conservative estimate 50,000-100,000+ globally<br>
+                        <strong>Growth Potential:</strong> <span class="priority-high">Very High</span><br><br>
+                        
+                        The exceptionally high engagement rate indicates:
+                        <ul>
+                            <li>Content resonates deeply with target audience</li>
+                            <li>Quality over quantity approach has built strong foundation</li>
+                            <li>Ready to scale without sacrificing engagement quality</li>
+                            <li>Audience is likely to share content organically if prompted</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="recommendation">
+                    <div class="recommendation-title">💡 Growth Strategy Recommendations</div>
+                    <div class="insight-text">
+                        <strong>Immediate Actions (Next 30 Days):</strong>
+                        <ol>
+                            <li><strong>Increase posting to 3x/week</strong> (12 posts/month minimum)</li>
+                            <li><strong>Launch daily Stories</strong> with Q&A, polls, behind-scenes</li>
+                            <li><strong>Create 5-10 Reels/month</strong> optimized for Explore page</li>
+                            <li><strong>Collaborate with 2-3 aligned accounts</strong> for cross-promotion</li>
+                            <li><strong>Run "Share to Story" CTA</strong> on high-value carousel posts</li>
+                        </ol>
+                        <br>
+                        <strong>90-Day Goal:</strong> 500-1,000 followers (2-4x growth) while maintaining 8%+ engagement
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BRAND CONSISTENCY -->
+        <div id="brand" class="content-section">
+            <div class="card">
+                <h2>🎨 Brand Identity & Consistency</h2>
+                
+                <div class="insight-box">
+                    <div class="insight-title">✓ Brand Strengths</div>
+                    <div class="insight-text">
+                        <strong>Overall Assessment:</strong> <span class="status-badge status-excellent">Highly Consistent</span><br><br>
+                        
+                        <strong>Visual Identity:</strong>
+                        <ul>
+                            <li>Consistent color palette: Purple/violet gradients, black, white, gold accents</li>
+                            <li>Professional graphic design quality across all carousel posts</li>
+                            <li>Recognizable "Affirmations with Dola" branded series</li>
+                            <li>Clean, modern aesthetic that conveys professionalism and inspiration</li>
+                            <li>HACC cohort graphics maintain consistent institutional branding</li>
+                        </ul>
+                        <br>
+                        <strong>Voice & Messaging:</strong>
+                        <ul>
+                            <li>Distinctive voice: Thoughtful, faith-rooted, strategically direct</li>
+                            <li>Consistent themes: Alignment, higher intelligence, global excellence</li>
+                            <li>Educational yet inspirational tone - balances expertise with accessibility</li>
+                            <li>Long-form captions demonstrate depth without becoming preachy</li>
+                            <li>Scripture integration is natural and purposeful, not performative</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Content Pillar Representation</h3>
+                
+                <div class="content-pillar">
+                    <div class="pillar-title">Building Highly-Aligned Global Talent ✨</div>
+                    <div class="pillar-content">
+                        <strong>Visual Execution:</strong> HACC promotional graphics, webinar invitations, LinkedIn positioning content<br>
+                        <strong>Voice:</strong> Expert, strategic, globally-minded, systems-focused<br>
+                        <strong>Consistency:</strong> <span class="status-badge status-excellent">Strong</span> - Clear differentiation between educational content and promotional material<br>
+                        <strong>Examples:</strong> "Global Brands Identify High Performers," "CV Screening Behind the Scenes," "Exposure as Light"
+                    </div>
+                </div>
+
+                <div class="content-pillar">
+                    <div class="pillar-title">Equipping Higher Intelligence</div>
+                    <div class="pillar-content">
+                        <strong>Visual Execution:</strong> Career Gospel podcast clips, guest expert features<br>
+                        <strong>Voice:</strong> Prophetic, kingdom-minded, spiritually intelligent<br>
+                        <strong>Consistency:</strong> <span class="status-badge status-good">Developing</span> - Strong concept, needs more standalone content beyond podcast clips<br>
+                        <strong>Examples:</strong> "Higher Intelligence vs AI," "Gifts of Spirit in Marketplace," "Data vs. Divine Insight"
+                    </div>
+                </div>
+
+                <div class="content-pillar">
+                    <div class="pillar-title">Living Light 💡</div>
+                    <div class="pillar-content">
+                        <strong>Visual Execution:</strong> Affirmation carousels, personal story videos, scripture-based content<br>
+                        <strong>Voice:</strong> Authentic, vulnerable, faith-anchored, encouraging<br>
+                        <strong>Consistency:</strong> <span class="status-badge status-excellent">Exceptional</span> - Most resonant pillar, highest engagement, clear brand signature<br>
+                        <strong>Examples:</strong> "Audience of One," "Alignment Over Anxiety," "Identity & Purpose Clarity"
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📝 Bio & Profile Optimization</h2>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Current Bio Analysis</div>
+                    <div class="insight-text">
+                        <strong>Current Bio:</strong><br>
+                        "Building Highly-Aligned Global Talent✨<br>
+                        Equipping Higher Intelligence<br>
+                        Living Light 💡<br>
+                        Host: @careergospel"<br><br>
+                        
+                        <strong>Strengths:</strong>
+                        <ul>
+                            <li>✓ Three content pillars clearly stated</li>
+                            <li>✓ Brand voice is immediately evident</li>
+                            <li>✓ Links to Career Gospel show ecosystem connection</li>
+                            <li>✓ Emojis add visual interest without being excessive</li>
+                        </ul>
+                        <br>
+                        <strong>Opportunities:</strong>
+                        <ul>
+                            <li>⚠ No clear CTA or next step for new visitors</li>
+                            <li>⚠ Missing "who this is for" qualifier</li>
+                            <li>⚠ Could add HACC mention for lead generation</li>
+                            <li>⚠ Website links could be more specific (link in bio strategy)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="recommendation">
+                    <div class="recommendation-title">💡 Optimized Bio Option</div>
+                    <div class="insight-text" style="background: #f7fafc; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                        <strong>Option A (Tactical):</strong><br>
+                        "Helping Global Professionals Build Aligned Careers 🌍<br>
+                        Faith-Driven Career Strategist | HACC Founder<br>
+                        ✨ Higher Intelligence for Kingdom Impact<br>
+                        Host: @careergospel<br>
+                        👇 Start with HACC"<br><br>
+
+                        <strong>Option B (Current + Enhanced):</strong><br>
+                        "Building Highly-Aligned Global Talent✨<br>
+                        Equipping Higher Intelligence | Living Light 💡<br>
+                        Founder: HACC | Host: @careergospel<br>
+                        👇 Join the cohort"
+                    </div>
+                </div>
+
+                <h3>Link Strategy</h3>
+                <div class="insight-box">
+                    <div class="insight-title">Current Links</div>
+                    <div class="insight-text">
+                        <ul>
+                            <li><strong>Website:</strong> www.theoyedola.com</li>
+                            <li><strong>HACC Registration:</strong> theoyedola.com/join-the-highly-aligned-career-cohort/</li>
+                        </ul>
+                        <br>
+                        <strong>Recommendation:</strong> Use a link-in-bio tool (Linktree, Stan, Beacons) to:<br>
+                        <ol>
+                            <li>HACC Registration (primary CTA)</li>
+                            <li>Career Gospel Podcast</li>
+                            <li>Latest Webinar/Resource</li>
+                            <li>Email List Sign-up</li>
+                            <li>LinkedIn Profile</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🔍 Profile Elements Review</h2>
+                
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr style="background: #f7fafc;">
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0;">Element</th>
+                        <th style="padding: 12px; text-align: center; border-bottom: 2px solid #e2e8f0;">Status</th>
+                        <th style="padding: 12px; text-align: left; border-bottom: 2px solid #e2e8f0;">Notes</th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;"><strong>Profile Photo</strong></td>
+                        <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e2e8f0;"><span class="status-badge status-excellent">Excellent</span></td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Professional, clear, recognizable</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;"><strong>Verification Badge</strong></td>
+                        <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e2e8f0;"><span class="status-badge status-excellent">Verified ✓</span></td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Adds significant credibility</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;"><strong>Story Highlights</strong></td>
+                        <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e2e8f0;"><span class="status-badge status-needs-work">None Visible</span></td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Major missed opportunity - should have HACC, Testimonials, Resources, About</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;"><strong>Grid Aesthetic</strong></td>
+                        <td style="padding: 12px; text-align: center; border-bottom: 1px solid #e2e8f0;"><span class="status-badge status-excellent">Cohesive</span></td>
+                        <td style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Consistent colors, professional design, recognizable brand</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 12px;"><strong>Pinned Posts</strong></td>
+                        <td style="padding: 12px; text-align: center;"><span class="status-badge status-excellent">Strategic</span></td>
+                        <td style="padding: 12px;">3 pinned posts showcase core values and key content pillars</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- RECOMMENDATIONS -->
+        <div id="recommendations" class="content-section">
+            <div class="card">
+                <h2>🚀 Strategic Recommendations & Action Plan</h2>
+                
+                <div class="recommendation">
+                    <div class="recommendation-title">Priority 1: Increase Reach Through Consistent Posting</div>
+                    <div class="insight-text">
+                        <strong>Current State:</strong> ~3 posts/month | <strong>Target:</strong> 12-15 posts/month<br><br>
+                        
+                        <strong>Action Plan:</strong>
+                        <ol>
+                            <li><strong>Week 1-2:</strong> Create content calendar for next 30 days
+                                <ul>
+                                    <li>Map out pillar content (4 Talent Building, 3 Higher Intelligence, 5 Living Light)</li>
+                                    <li>Schedule 3 posts/week (Mon/Wed/Fri)</li>
+                                    <li>Batch-create 4-6 carousels in advance</li>
+                                </ul>
+                            </li>
+                            <li><strong>Week 3-4:</strong> Implement posting schedule
+                                <ul>
+                                    <li>Monday: Educational/HACC content</li>
+                                    <li>Wednesday: Inspiration/Affirmations</li>
+                                    <li>Friday: Career Gospel/Higher Intelligence</li>
+                                </ul>
+                            </li>
+                            <li><strong>Daily:</strong> Post 3-5 Stories
+                                <ul>
+                                    <li>Behind-the-scenes of cohort facilitation</li>
+                                    <li>Quick tips or reflections</li>
+                                    <li>Poll/Q&A to drive engagement</li>
+                                    <li>Reshare relevant content with commentary</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <br>
+                        <strong>Expected Impact:</strong> 2-3x follower growth in 90 days, improved algorithm visibility
+                    </div>
+                </div>
+
+                <div class="recommendation">
+                    <div class="recommendation-title">Priority 2: Leverage Reels for Discovery & Reach</div>
+                    <div class="insight-text">
+                        <strong>Current State:</strong> 4 video posts (33%) | <strong>Target:</strong> 50%+ video content<br><br>
+                        
+                        <strong>Reel Content Strategy:</strong>
+                        <ol>
+                            <li><strong>Repurpose Top Performing Content:</strong>
+                                <ul>
+                                    <li>Turn carousel slides into Reel format (text on screen + voiceover)</li>
+                                    <li>Clip best moments from Career Gospel episodes (30-60 sec)</li>
+                                    <li>Create "Affirmations with Dola" Reel series</li>
+                                </ul>
+                            </li>
+                            <li><strong>Original Reel Ideas (8-10/month):</strong>
+                                <ul>
+                                    <li>"3 Signs You're Ready for Global Career Impact"</li>
+                                    <li>"The Difference Between Striving and Alignment"</li>
+                                    <li>"How I Positioned for Payment Strategy Roles"</li>
+                                    <li>"What 'Higher Intelligence' Actually Means"</li>
+                                    <li>"Red Flags in Global Job Applications"</li>
+                                    <li>"One Thing I Learned from HACC This Week"</li>
+                                </ul>
+                            </li>
+                            <li><strong>Format Tips:</strong>
+                                <ul>
+                                    <li>Hook in first 3 seconds</li>
+                                    <li>Use trending audio (but on-brand)</li>
+                                    <li>Add captions for accessibility</li>
+                                    <li>End with clear CTA</li>
+                                    <li>Hashtags: 5-10 mix of niche and broad</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <br>
+                        <strong>Expected Impact:</strong> Reach 10,000-50,000+ through Explore page, attract ideal audience
+                    </div>
+                </div>
+
+                <div class="recommendation">
+                    <div class="recommendation-title">Priority 3: Build Community Through Story Highlights & Engagement</div>
+                    <div class="insight-text">
+                        <strong>Current State:</strong> No story highlights | <strong>Target:</strong> 5-7 strategic highlights<br><br>
+                        
+                        <strong>Recommended Story Highlights:</strong>
+                        <ol>
+                            <li><strong>✨ About:</strong> Who you are, your story, credentials, mission</li>
+                            <li><strong>🎓 HACC:</strong> What it is, testimonials, how to join, next cohort dates</li>
+                            <li><strong>🎙️ Career Gospel:</strong> Podcast clips, where to listen, guest features</li>
+                            <li><strong>💡 Resources:</strong> Free downloads, webinar replays, guides</li>
+                            <li><strong>🙌 Wins:</strong> Client testimonials, transformation stories, impact</li>
+                            <li><strong>📚 Learning:</strong> Quick tips, career insights, daily wisdom</li>
+                            <li><strong>🔔 Events:</strong> Upcoming webinars, cohort launches, live sessions</li>
+                        </ol>
+                        <br>
+                        <strong>Engagement Tactics:</strong>
+                        <ul>
+                            <li>Daily "Question of the Day" in Stories → Highlight best responses</li>
+                            <li>Weekly "Office Hours" - Answer DM questions publicly (with permission)</li>
+                            <li>"This or That" polls related to career decisions</li>
+                            <li>Countdown stickers for HACC launches/webinars</li>
+                        </ul>
+                        <br>
+                        <strong>Expected Impact:</strong> Higher conversion of profile visitors to followers, clearer customer journey
+                    </div>
+                </div>
+
+                <div class="recommendation">
+                    <div class="recommendation-title">Priority 4: Amplify "Equipping Higher Intelligence" Pillar</div>
+                    <div class="insight-text">
+                        <strong>Current State:</strong> Moderate representation | <strong>Target:</strong> Equal weight with other pillars<br><br>
+                        
+                        <strong>Content Ideas:</strong>
+                        <ol>
+                            <li><strong>Standalone Education Series:</strong>
+                                <ul>
+                                    <li>"Higher Intelligence vs. Human Intelligence" carousel</li>
+                                    <li>"How Prophetic Insight Guides Career Decisions" video</li>
+                                    <li>"The 3 Spiritual Gifts Most Needed in Business" post</li>
+                                    <li>"Case Study: When Data Says No But Spirit Says Yes"</li>
+                                </ul>
+                            </li>
+                            <li><strong>Career Gospel Integration:</strong>
+                                <ul>
+                                    <li>Create quote graphics from podcast episodes</li>
+                                    <li>Guest expert spotlights (like Solomon Ayodele)</li>
+                                    <li>"Best of Career Gospel" monthly roundup</li>
+                                </ul>
+                            </li>
+                            <li><strong>Personal Application:</strong>
+                                <ul>
+                                    <li>Share stories of when higher intelligence guided your career</li>
+                                    <li>Teach framework: "How I Discern vs. How I Strategize"</li>
+                                    <li>Marketplace theology made practical</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <br>
+                        <strong>Expected Impact:</strong> Differentiation from secular career coaches, attract spirit-led professionals
+                    </div>
+                </div>
+
+                <div class="recommendation">
+                    <div class="recommendation-title">Priority 5: Optimize for Conversion (Followers → HACC Members)</div>
+                    <div class="insight-text">
+                        <strong>Current Funnel:</strong> Profile → Content → Website → HACC<br>
+                        <strong>Optimized Funnel:</strong> Reel → Profile → Lead Magnet → Email → HACC<br><br>
+                        
+                        <strong>Conversion Strategy:</strong>
+                        <ol>
+                            <li><strong>Create Lead Magnet:</strong>
+                                <ul>
+                                    <li>"10 LinkedIn Optimization Strategies for Global Roles" PDF</li>
+                                    <li>"The Aligned Career Assessment" quiz</li>
+                                    <li>"5 Interview Questions That Reveal Higher Intelligence" guide</li>
+                                </ul>
+                            </li>
+                            <li><strong>Add CTAs to Content:</strong>
+                                <ul>
+                                    <li>Every 3rd post ends with "Learn more in HACC - link in bio"</li>
+                                    <li>Stories swipe-up to lead magnet landing page</li>
+                                    <li>DM automation: "Reply ALIGN for the free career clarity guide"</li>
+                                </ul>
+                            </li>
+                            <li><strong>Nurture Sequence:</strong>
+                                <ul>
+                                    <li>Lead magnet → Welcome email → 5-day value sequence → HACC invitation</li>
+                                    <li>Weekly email with exclusive content not on Instagram</li>
+                                    <li>Monthly webinar for email list (becomes HACC feeder)</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <br>
+                        <strong>Expected Impact:</strong> 10-20% conversion rate from engaged followers to email list, 5-10% email to HACC
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📅 90-Day Implementation Roadmap</h2>
+                
+                <h3>Month 1: Foundation & Consistency (Days 1-30)</h3>
+                <div class="action-items">
+                    <h4>Week 1-2:</h4>
+                    <ul>
+                        <li class="priority-high">HIGH: Create 30-day content calendar (3 posts/week)</li>
+                        <li class="priority-high">HIGH: Design and launch 5 Story Highlights</li>
+                        <li class="priority-high">HIGH: Set up daily Story posting routine</li>
+                        <li class="priority-medium">MEDIUM: Batch-create 6 Reels for Month 1</li>
+                        <li class="priority-low">LOW: Audit and optimize bio/links</li>
+                    </ul>
+                    <h4>Week 3-4:</h4>
+                    <ul>
+                        <li class="priority-high">HIGH: Post 3x/week consistently (12 posts total)</li>
+                        <li class="priority-high">HIGH: Daily Stories (min. 3/day)</li>
+                        <li class="priority-medium">MEDIUM: Launch "Affirmations with Dola" Reel series (2 Reels)</li>
+                        <li class="priority-medium">MEDIUM: Create lead magnet PDF</li>
+                        <li class="priority-low">LOW: Engage with 10 accounts daily (comments, DMs)</li>
+                    </ul>
+                    <strong>Month 1 Goal:</strong> Establish posting rhythm, increase to 400-500 followers
+                </div>
+
+                <h3>Month 2: Amplification & Growth (Days 31-60)</h3>
+                <div class="action-items">
+                    <h4>Week 5-6:</h4>
+                    <ul>
+                        <li class="priority-high">HIGH: Increase to 4 Reels/week (discovery focus)</li>
+                        <li class="priority-high">HIGH: Launch lead magnet with DM automation</li>
+                        <li class="priority-medium">MEDIUM: Collaborate with 2 aligned accounts (guest posts/Lives)</li>
+                        <li class="priority-medium">MEDIUM: Create "Higher Intelligence" content series (4 posts)</li>
+                        <li class="priority-low">LOW: Host Instagram Live Q&A</li>
+                    </ul>
+                    <h4>Week 7-8:</h4>
+                    <ul>
+                        <li class="priority-high">HIGH: Maintain 3 feed posts + 4 Reels/week</li>
+                        <li class="priority-medium">MEDIUM: Launch email nurture sequence</li>
+                        <li class="priority-medium">MEDIUM: Create testimonial Story Highlight from HACC members</li>
+                        <li class="priority-low">LOW: Run "Share to Story" engagement campaign</li>
+                    </ul>
+                    <strong>Month 2 Goal:</strong> Hit 700-1,000 followers, establish lead generation funnel
+                </div>
+
+                <h3>Month 3: Optimization & Scale (Days 61-90)</h3>
+                <div class="action-items">
+                    <h4>Week 9-10:</h4>
+                    <ul>
+                        <li class="priority-high">HIGH: Analyze performance data, double down on what's working</li>
+                        <li class="priority-high">HIGH: Launch mini HACC promotion campaign (4-5 posts)</li>
+                        <li class="priority-medium">MEDIUM: Guest on 2-3 other Instagram accounts/podcasts</li>
+                        <li class="priority-medium">MEDIUM: Create "Best of Career Gospel" Reel series</li>
+                        <li class="priority-low">LOW: Experiment with Instagram Guides feature</li>
+                    </ul>
+                    <h4>Week 11-12:</h4>
+                    <ul>
+                        <li class="priority-high">HIGH: Host live webinar, promote heavily on Instagram</li>
+                        <li class="priority-medium">MEDIUM: Create UGC campaign with HACC testimonials</li>
+                        <li class="priority-medium">MEDIUM: Optimize high-performing Reels (recreate, remix)</li>
+                        <li class="priority-low">LOW: Document wins and lessons for next 90-day cycle</li>
+                    </ul>
+                    <strong>Month 3 Goal:</strong> 1,200-1,500 followers, 100+ email subscribers, 10-15 HACC registrations
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📊 Success Metrics & KPIs</h2>
+                
+                <div class="insight-box">
+                    <div class="insight-title">30-Day Targets</div>
+                    <ul>
+                        <li><strong>Followers:</strong> 350-450 (+35-75%)</li>
+                        <li><strong>Engagement Rate:</strong> Maintain 8-10%</li>
+                        <li><strong>Profile Visits:</strong> 1,000+</li>
+                        <li><strong>Content Reach:</strong> 5,000-10,000</li>
+                        <li><strong>Story Views:</strong> 100-150/day</li>
+                        <li><strong>Lead Magnet Downloads:</strong> 30-50</li>
+                    </ul>
+                </div>
+
+                <div class="insight-box">
+                    <div class="insight-title">90-Day Targets</div>
+                    <ul>
+                        <li><strong>Followers:</strong> 1,200-1,500 (+360-480%)</li>
+                        <li><strong>Engagement Rate:</strong> 6-8% (normal as audience scales)</li>
+                        <li><strong>Email List:</strong> 100-200 subscribers</li>
+                        <li><strong>HACC Registrations:</strong> 15-25 from Instagram</li>
+                        <li><strong>Monthly Reach:</strong> 25,000-50,000</li>
+                        <li><strong>Reel Virality:</strong> 1-2 Reels hit 10,000+ views</li>
+                    </ul>
+                </div>
+
+                <div class="recommendation">
+                    <div class="recommendation-title">💡 How to Track These Metrics</div>
+                    <div class="insight-text">
+                        <strong>Weekly Review (Every Monday):</strong>
+                        <ol>
+                            <li>Check Instagram Insights (follower growth, reach, engagement)</li>
+                            <li>Note top 3 performing posts from past week</li>
+                            <li>Track lead magnet conversions (landing page analytics)</li>
+                            <li>Review Story views and interaction stickers</li>
+                        </ol>
+                        <br>
+                        <strong>Monthly Deep Dive (Last day of month):</strong>
+                        <ol>
+                            <li>Export Instagram analytics to spreadsheet</li>
+                            <li>Calculate engagement rate trends</li>
+                            <li>Identify content themes with highest performance</li>
+                            <li>Assess follower quality (are they target audience?)</li>
+                            <li>Measure HACC conversion rate from Instagram traffic</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>⚠️ Potential Challenges & Solutions</h2>
+                
+                <div class="warning">
+                    <div class="warning-title">Challenge 1: Time Management (Creating More Content)</div>
+                    <div class="insight-text">
+                        <strong>Solution:</strong>
+                        <ul>
+                            <li><strong>Batch Creation:</strong> Dedicate 3-4 hours weekly to create all content at once</li>
+                            <li><strong>Repurpose:</strong> Turn HACC session slides into carousels, webinar clips into Reels</li>
+                            <li><strong>Templates:</strong> Create Canva templates for each content pillar (speeds up creation)</li>
+                            <li><strong>Scheduling Tools:</strong> Use Later, Planoly, or Meta Business Suite to schedule in advance</li>
+                            <li><strong>VA Support:</strong> Hire part-time VA for video editing, caption writing, or scheduling</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <div class="warning-title">Challenge 2: Maintaining Authenticity While Scaling</div>
+                    <div class="insight-text">
+                        <strong>Solution:</strong>
+                        <ul>
+                            <li>Keep Stories raw and unpolished (authentic connection)</li>
+                            <li>Share personal reflections weekly, not just teaching</li>
+                            <li>Respond to DMs personally, even as audience grows</li>
+                            <li>Don't sacrifice depth for frequency - quality always wins</li>
+                            <li>Let "Living Light" pillar guide all content decisions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="warning">
+                    <div class="warning-title">Challenge 3: Algorithm Changes & Reach Fluctuations</div>
+                    <div class="insight-text">
+                        <strong>Solution:</strong>
+                        <ul>
+                            <li>Diversify content formats (Reels, carousels, static, video)</li>
+                            <li>Focus on saves and shares (algorithm loves these)</li>
+                            <li>Build email list so you're not algorithm-dependent</li>
+                            <li>Collaborate with others to tap into their audiences</li>
+                            <li>Stay updated on Instagram best practices (follow @creators)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>✅ Quick Wins (Implement This Week)</h2>
+                
+                <div class="recommendation">
+                    <div class="recommendation-title">5 Actions for Immediate Impact</div>
+                    <ol>
+                        <li><strong>Create 3 Story Highlights TODAY:</strong> About, HACC, Resources (30 min)</li>
+                        <li><strong>Post 1 Carousel This Week:</strong> Repurpose best-performing content (45 min)</li>
+                        <li><strong>Create 1 Reel:</strong> Turn "Audience of One" theme into 60-sec Reel (1 hour)</li>
+                        <li><strong>Update Bio:</strong> Add clear CTA and link strategy (15 min)</li>
+                        <li><strong>Daily Stories Commitment:</strong> Post 3 Stories/day for next 7 days (15 min/day)</li>
+                    </ol>
+                    <br>
+                    <strong>Total Time Investment:</strong> ~5 hours this week<br>
+                    <strong>Expected Result:</strong> Immediate improvement in profile conversions.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            document.getElementById(sectionId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Print functionality
+        window.addEventListener('beforeprint', function() {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.add('active');
+            });
+        });
+
+        window.addEventListener('afterprint', function() {
+            showSection('overview');
+        });
+    </script>
+</body>
+</html>
